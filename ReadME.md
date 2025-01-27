@@ -21,14 +21,14 @@ Flexible key-value pair generation for indexing:
 Saves the index to a specified directory for future use.
 
 ```
-python create_index.py --index_type <index_type> --key <key> [--dataset_path <dataset_path>] [--index_root_dir <index_root_dir>]
+python -m indexing.create_index --index_type <index_type> --key <key> [--dataset_path <dataset_path>] [--index_root_dir <index_root_dir>]
 
 ```
 
 ## Running a Query
 
 ```
-python query_index.py --index_name <index_name> [--index_root_dir <index_root_dir>] [--top_k <top_k>]
+python -m indexing.query_index --index_name <index_name> [--index_root_dir <index_root_dir>] [--top_k <top_k>]
 ```
 
 
