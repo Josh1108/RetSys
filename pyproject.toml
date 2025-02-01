@@ -21,6 +21,7 @@ dependencies = [
     "spacy",
     "datasets",
     "InstructorEmbedding",
+    "PyPDF2",
 ]
 
 [project.optional-dependencies]
