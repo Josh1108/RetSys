@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-pip install retrieval_lib
+pip install git+https://github.com/Jo1811/retrieval_lib.git
 ```
 
 ## Quick Start
