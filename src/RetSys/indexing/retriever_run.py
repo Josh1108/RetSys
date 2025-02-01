@@ -13,7 +13,16 @@ import os
 
 class Retriever:
     def __init__(self, index_type: str, index_name: str, index_save_dir: str):
-        """Create a new Retriever to build an index"""
+        """
+        Initialize the Retriever class.
+
+        :param index_type: The type of index to build.
+        :type index_type: str
+        :param index_name: The name of the index.
+        :type index_name: str
+        :param index_save_dir: The directory to save the index.
+        :type index_save_dir: str
+        """
         self.index_type = index_type
         self.index_name = index_name 
         self.save_dir = index_save_dir
@@ -21,7 +30,12 @@ class Retriever:
 
     @classmethod
     def load_from_path(cls, index_path: str):
-        """Load an existing index from disk"""
+        """
+        Load an existing index from disk.
+
+        :param index_path: The path to the index.
+        :type index_path: str
+        """
         index_dir = os.path.dirname(index_path)
         index_name = os.path.basename(index_path)
         index_type = index_name.split(".")[-1]
@@ -36,7 +50,24 @@ class Retriever:
         return retriever
     def insert_data_and_save_index(self, dir_path: str, dataset_name: str, private: bool = False,
                  save_locally: bool = False, save_on_hf_hub: bool = False, dataset_dir: str = ".", granularity: str = "paragraphs"):
-        """Convert data and build new index"""
+        """
+        Convert data and build new index.
+
+        :param dir_path: The path to the directory containing data.
+        :type dir_path: str
+        :param dataset_name: The name of the dataset.
+        :type dataset_name: str
+        :param private: Whether the dataset should be private.
+        :type private: bool
+        :param save_locally: Whether to save the dataset locally.
+        :type save_locally: bool
+        :param save_on_hf_hub: Whether to save the dataset on the Hugging Face Hub.
+        :type save_on_hf_hub: bool
+        :param dataset_dir: The directory to save the dataset.
+        :type dataset_dir: str
+        :param granularity: The granularity of the index.
+        :type granularity: str
+        """
         # Convert raw data to dataset
         dataset_converter = DatasetConverter()
         dataset_converter.run(dir_path, dataset_name, private, save_locally, save_on_hf_hub, dataset_dir)
@@ -55,6 +86,16 @@ class Retriever:
         self.index = index_builder.index
 
     def query(self, query: str, top_k: int = 10, return_keys: bool = False):
+        """
+        Query the index.
+
+        :param query: The query to search for.
+        :type query: str
+        :param top_k: The number of results to return.
+        :type top_k: int
+        :param return_keys: Whether to return the keys.
+        :type return_keys: bool
+        """
         if self.index is None:
             raise ValueError("No index loaded. Either load_data() or load_from_path() must be called first")
         
