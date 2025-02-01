@@ -19,7 +19,7 @@ print(retriever.query("How are the boundaries of the source water area determine
 ```Python
 from RetSys.indexing import Retriever
 
-retriever = Retriever(index_type="bm25", index_name="maritime_docs", save_dir="retrieval_indices")
+retriever = Retriever(index_type="bm25", index_name="maritime_docs", index_save_dir="retrieval_indices")
 retriever.insert_data_and_save_index("folder_with_docs", "dataset_name", save_locally=True, granularity="paragraphs")
 retriever.query("How are the boundaries of the source water area determined", return_keys=True)
 ```
