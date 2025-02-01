@@ -2,9 +2,9 @@ import sentence_transformers
 import numpy as np
 from typing import List, Any
 from sklearn.metrics.pairwise import cosine_similarity
-from eval.retrieval.kv_store import KVStore
-from eval.retrieval.kv_store import TextType
-from RetSys.indexing import utils
+from .kv_store import KVStore
+from .kv_store import TextType
+from . import utils
 
 class GTR(KVStore):
     """

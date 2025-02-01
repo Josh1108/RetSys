@@ -2,8 +2,8 @@ import numpy as np
 from typing import List, Any
 from sklearn.metrics.pairwise import cosine_similarity
 from gritlm import GritLM
-from eval.retrieval.kv_store import KVStore
-from eval.retrieval.kv_store import TextType
+from .kv_store import KVStore
+from .kv_store import TextType
 
 class GRIT(KVStore):
     def __init__(self, index_name: str, raw_instruction: str, model_path: str = "GritLM/GritLM-7B"):

@@ -3,8 +3,8 @@ import numpy as np
 from tqdm import tqdm
 from rank_bm25 import BM25Okapi
 from typing import List, Tuple, Any
-from indexing.kv_store import KVStore
-from indexing.kv_store import TextType
+from .kv_store import KVStore
+from .kv_store import TextType
 
 
 class BM25(KVStore):
