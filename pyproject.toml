@@ -11,7 +11,7 @@ authors = [
 ]
 description = "Library for text retrieval and indexing"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.8"
 dependencies = [
     "numpy",
     "tqdm",

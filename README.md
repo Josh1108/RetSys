@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-pip install git+https://github.com/Jo1811/retrieval_lib.git
+pip3 install git+https://github.com/Josh1108/RetSys.git   
 ```
 
 ## Quick Start
