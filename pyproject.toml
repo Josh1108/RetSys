@@ -22,6 +22,7 @@ dependencies = [
     "datasets",
     "InstructorEmbedding",
     "PyPDF2",
+    "rank_bm25",
 ]
 
 [project.optional-dependencies]
