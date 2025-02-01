@@ -47,7 +47,7 @@ class DatasetConverter:
             elif file.endswith(".pdf"):
                 self.parse_pdf_file(os.path.join(data_dir, file))
 
-    def save_dataset(self, dataset_name:str, private:bool=False,save_locally:bool=False,save_on_hf_hub:bool=False):
+    def save_dataset(self, dataset_name:str, private:bool=False,save_locally:bool=False,save_on_hf_hub:bool=False,dataset_dir:str="."):
         """
         Save the dataset to a local file or push it to the Hugging Face Hub.
 
@@ -59,15 +59,19 @@ class DatasetConverter:
         :type save_locally: bool
         :param save_on_hf_hub: Whether to push the dataset to the Hugging Face Hub.
         :type save_on_hf_hub: bool
+        :param dataset_dir: Path to the dataset to be saved or pushed.
+        :type dataset_dir: str
         """
         assert save_locally or save_on_hf_hub, "Must save dataset locally or on HF Hub"
+        if save_locally:
+            dataset_path = os.path.join(dataset_dir, dataset_name)
         processed_dataset = Dataset.from_list(self.data_list, split="full")
         if save_locally:
-            processed_dataset.save_to_disk(dataset_name)
-        elif save_on_hf_hub:
+            processed_dataset.save_to_disk(dataset_path)
+        if save_on_hf_hub:
             processed_dataset.push_to_hub(dataset_name, private=private)
     
-    def run(self, data_dir:str, dataset_name:str, private:bool=False,save_locally:bool=False,save_on_hf_hub:bool=False):
+    def run(self, data_dir:str, dataset_name:str, private:bool=False,save_locally:bool=False,save_on_hf_hub:bool=False,dataset_dir:str="."):
         """
         Run the dataset conversion and saving process.
 
@@ -81,6 +85,8 @@ class DatasetConverter:
         :type save_locally: bool
         :param save_on_hf_hub: Whether to push the dataset to the Hugging Face Hub.
         :type save_on_hf_hub: bool
+        :param dataset_dir: Path to the dataset to be saved or pushed.
+        :type dataset_dir: str
         """
         self.load_dir_files(data_dir)
-        self.save_dataset(dataset_name, private, save_locally, save_on_hf_hub)
+        self.save_dataset(dataset_name, private, save_locally, save_on_hf_hub,dataset_dir)

@@ -4,7 +4,7 @@ from typing import List, Any
 from sklearn.metrics.pairwise import cosine_similarity
 from eval.retrieval.kv_store import KVStore
 from eval.retrieval.kv_store import TextType
-from utils import utils
+from RetSys.indexing import utils
 
 class E5(KVStore):
     def __init__(self, index_name: str, model_path: str = "intfloat/e5-large-v2"):

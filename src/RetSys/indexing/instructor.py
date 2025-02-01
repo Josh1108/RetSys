@@ -2,7 +2,7 @@ import numpy as np
 from typing import List, Any
 from sklearn.metrics.pairwise import cosine_similarity
 from InstructorEmbedding import INSTRUCTOR
-from utils import utils
+from RetSys.indexing import utils
 from eval.retrieval.kv_store import KVStore
 from eval.retrieval.kv_store import TextType
 

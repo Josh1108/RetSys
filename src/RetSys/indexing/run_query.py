@@ -2,7 +2,7 @@ import os
 import argparse
 import datasets
 from tqdm import tqdm
-from utils import utils
+from RetSys.indexing import utils
 from indexing.kv_store import KVStore
 
 

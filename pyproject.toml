@@ -1,0 +1,36 @@
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "RetSys"
+version = "1.0.0"
+authors = [
+    { name = "Jushaan", email = "jkalra@andrew.cmu.edu" }
+]
+description = "Library for text retrieval and indexing"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "tqdm",
+    "torch",
+    "transformers",
+    "scikit-learn",
+    "spacy",
+    "datasets",
+    "InstructorEmbedding",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "isort",
+    "flake8",
+    "pytest",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"} 
+packages = ["RetSys.indexing"]
