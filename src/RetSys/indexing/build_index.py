@@ -85,6 +85,7 @@ class IndexBuilder:
                 paragraphs = utils.get_clean_paragraphs(record)
                 for paragraph_idx, paragraph in enumerate(paragraphs):
                     kv_pairs[paragraph] = (corpusid, paragraph_idx)
+        
         return kv_pairs
     def load_index(self, index_path: str) -> KVStore:
         """

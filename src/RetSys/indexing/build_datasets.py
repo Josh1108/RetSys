@@ -31,9 +31,9 @@ class DatasetConverter:
         """
         with open(pdf_file_path, "rb") as f:
             pdf_reader = PyPDF2.PdfReader(f)
-            for page in pdf_reader.pages:
+            for i,page in enumerate(pdf_reader.pages):
                 text = page.extract_text()
-                self.data_list.append({"file_name": pdf_file_path, "document": text})
+                self.data_list.append({"file_name": pdf_file_path, "document": text, "page_number": i+1})
     def load_dir_files(self, data_dir:str):
         """
         Load all files in a directory and insert them into the dataset.

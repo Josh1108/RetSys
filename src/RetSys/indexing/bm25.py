@@ -60,9 +60,9 @@ class BM25(KVStore):
         :return: The indices of the results.
         :rtype: List[int]
         """
-        top_indices = np.argsort(self.index.get_scores(encoded_query))[::-1][
-            :n
-        ].tolist()
+        scores = self.index.get_scores(encoded_query)
+        sorted_indices = np.argsort(scores)[::-1]  # Sort once and store
+        top_indices = sorted_indices[:n].tolist()
         return top_indices
 
     def clear(self) -> None:

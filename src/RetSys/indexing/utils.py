@@ -15,7 +15,10 @@ nlp.max_length = 100000000
 
 
 def get_clean_corpusid(item: dict) -> str:
-    return item["file_name"]
+    if "page_number" in item:
+        return f"{item['file_name']}_page_{item['page_number']}"
+    else:
+        return item["file_name"]
 
 
 def get_clean_full_text(item: dict) -> str:

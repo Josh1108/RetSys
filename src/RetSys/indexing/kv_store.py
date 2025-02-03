@@ -101,7 +101,7 @@ class KVStore:
             self.values.append(value)
         self.encoded_keys = self._encode_batch(self.keys, TextType.KEY)
 
-    def query(self, query_text: str, n: int, return_keys: bool = False) -> List[Any]:
+    def query(self, query_text: str, n: int, return_keys: bool = False, return_page_number: bool = False) -> List[Any]:
         """
         Query the index.
 
@@ -111,16 +111,49 @@ class KVStore:
         :type n: int
         :param return_keys: Whether to return the keys.
         :type return_keys: bool
+        :param return_page_number: Whether to return the page number.
+        :type return_page_number: bool
         :return: The results.
         :rtype: List[Any]
         """
         encoded_query = self._encode(query_text, TextType.QUERY)
         indices = self._query(encoded_query, n)
-        if return_keys:
-            results = [(self.keys[i], self.values[i]) for i in indices]
+        final_results = [] # list of dictionaries
+        
+        if return_page_number and return_keys:
+            
+            for i in indices:
+                answer_format = {"Text": "", "Page Number": "", "Location": ""}
+                if "_page_" in self.values[i][0]:
+                    page_number = self.values[i][0].split("_page_")[1]
+                else:
+                    page_number = "UNKNOWN"
+                answer_format["Text"] = self.keys[i]
+                answer_format["Page Number"] = page_number
+                answer_format["Location"] = self.values[i]
+                final_results.append(answer_format)
+        elif return_page_number:
+            for i in indices:
+                answer_format = {"Page Number": "", "Location": ""}
+                if "_page_" in self.values[i][0]:
+                    page_number = self.values[i][0].split("_page_")[1]
+                else:
+                    page_number = "UNKNOWN"
+                answer_format["Page Number"] = page_number
+                answer_format["Location"] = self.values[i]
+                final_results.append(answer_format)
+        elif return_keys:
+            for i in indices:
+                answer_format = {"Text": "", "Location": ""}
+                answer_format["Text"] = self.keys[i]
+                answer_format["Location"] = self.values[i]
+                final_results.append(answer_format)
         else:
-            results = [self.values[i] for i in indices]
-        return results
+            for i in indices:
+                answer_format = {"Location": ""}
+                answer_format["Location"] = self.values[i]
+                final_results.append(answer_format)
+        return final_results
 
     def save(self, dir_name: str) -> None:
         """

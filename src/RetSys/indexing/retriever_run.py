@@ -85,7 +85,7 @@ class Retriever:
         index_builder.index.save(self.save_dir)
         self.index = index_builder.index
 
-    def query(self, query: str, top_k: int = 10, return_keys: bool = False):
+    def query(self, query: str, top_k: int = 10, return_keys: bool = False, return_page_number: bool = False):
         """
         Query the index.
 
@@ -93,10 +93,12 @@ class Retriever:
         :type query: str
         :param top_k: The number of results to return.
         :type top_k: int
-        :param return_keys: Whether to return the keys.
+        :param return_keys: Whether to return the keys i.e. the text of the document.
         :type return_keys: bool
+        :param return_page_number: Whether to return the page number.
+        :type return_page_number: bool
         """
         if self.index is None:
             raise ValueError("No index loaded. Either load_data() or load_from_path() must be called first")
         
-        return self.index.query(query, top_k, return_keys)
+        return self.index.query(query, top_k, return_keys=return_keys, return_page_number=return_page_number)
