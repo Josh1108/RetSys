@@ -10,6 +10,25 @@ class DatasetConverter:
         """
         self.data_list =[]
 
+    def __parse_json_file(self, json_data:str):
+        """Parses a JSON object containing key-value lists into a formatted string."""
+        if isinstance(json_data, str):  # If input is a string, parse it into a dictionary
+            json_data = json.loads(json_data)
+    
+        def recursive_parse(data, prefix=""):
+            result = []
+            if isinstance(data, dict):
+                for key, value in data.items():
+                    result.append(recursive_parse(value, prefix + key + ": "))
+            elif isinstance(data, list):
+                for item in data:
+                    result.append(recursive_parse(item, prefix + "- "))
+            else:
+                result.append(f"{prefix}{str(data)}")
+            return "\n".join(filter(None, result))
+    
+        return recursive_parse(json_data)
+
     def insert_json_file(self, json_file_path:str):
         """
         Insert a JSON file into the dataset.
@@ -19,7 +38,7 @@ class DatasetConverter:
         """
         with open(json_file_path, "r") as f:
             json_data = json.load(f)  # Load JSON content
-            combined_text = " ".join(json_data)  # Combine the list of texts
+            combined_text = self.__parse_json_file(json_data) 
             self.data_list.append({"file_name": json_file_path, "document": combined_text})
     
     def parse_pdf_file(self, pdf_file_path:str):
