@@ -99,19 +99,19 @@ class IndexBuilder:
         """
         index_type = os.path.basename(index_path).split(".")[-1]
         if index_type == "bm25":
-            from indexing.bm25 import BM25
+            from .bm25 import BM25
 
             index = BM25(None).load(index_path)
         elif index_type == "instructor":
-            from indexing.instructor import Instructor
+            from .instructor import Instructor
 
             index = Instructor(None, None, None).load(index_path)
         elif index_type == "e5":
-            from indexing.e5 import E5
+            from .e5 import E5
 
             index = E5(None).load(index_path)
         elif index_type == "gtr":
-            from indexing.gtr import GTR
+            from .gtr import GTR
 
             index = GTR(None).load(index_path)
         else:
